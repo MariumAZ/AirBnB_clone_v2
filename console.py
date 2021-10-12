@@ -139,8 +139,8 @@ class HBNBCommand(cmd.Cmd):
                 if '_' in value:
                     value = value.replace("_", " ")
             # cast to float value with dot
-            elif '.' in value:
-                value = float(value)
+            #elif '.' in value:
+                #value = float(value)
             # cast to integer value with decimal
             elif re.match('^[0-9]+$', value):
                 value = int(value)
