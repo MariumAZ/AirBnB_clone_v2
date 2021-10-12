@@ -12,6 +12,7 @@ from models.amenity import Amenity
 from models.review import Review
 import inspect
 import shlex
+import re
 
 
 class HBNBCommand(cmd.Cmd):
@@ -132,6 +133,17 @@ class HBNBCommand(cmd.Cmd):
             attr = attr.split('=')
             key = attr[0]
             value = attr[1]
+            if re.match('^\"(.*)\"$', value):
+                value = value.strip('\"')
+                # replace the underscore with space
+                if '_' in value:
+                    value = value.replace("_", " ")
+            # cast to float value with dot
+            elif '.' in value:
+                value = float(value)
+            # cast to integer value with decimal
+            elif re.match('^[0-9]+$', value):
+                value = int(value)
             setattr(new_instance, key, value)
         #print(new_instance)    
         print(new_instance.id)
